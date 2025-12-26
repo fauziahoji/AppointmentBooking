@@ -1,3 +1,4 @@
+using AppointmentBooking.Core.Services;
 using AppointmentBooking.Core.Services.Interface;
 using AppointmentBooking.Infra.Data;
 using AppointmentBooking.Infra.Repositories;
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 
 var app = builder.Build();
 

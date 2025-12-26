@@ -11,28 +11,28 @@ namespace AppointmentBooking.Infra.Repositories
 {
     public class AppointmentRepository : IAppointmentRepository
     {
-        private readonly AppDbContext appDbContext;
+        private readonly AppDbContext _appDbContext;
 
         public AppointmentRepository(AppDbContext appDbContext)
         {
-            appDbContext = appDbContext;
+            _appDbContext = appDbContext;
         }
 
         public void AddAppointment(Appointment appointment)
         {
-            appDbContext.Add(appointment);
-            appDbContext.SaveChanges();
+            _appDbContext.Add(appointment);
+            _appDbContext.SaveChanges();
         }
 
         public int CountAppointmentByDate(DateTime date)
         {
-            return appDbContext.appointmentsEntity
+            return _appDbContext.appointmentsEntity
                 .Count(a => a.AppointmentDate.Date == date.Date);
         }
 
         public IEnumerable<Appointment> GetAppointmentByDate(DateTime date)
         {
-            return appDbContext.appointmentsEntity
+            return _appDbContext.appointmentsEntity
                 .Where(a => a.AppointmentDate == date.Date)
                 .OrderBy(a => a.TokenNumber)
                 .ToList();
